@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "full_name": "Kevin Peterson",
+    "email": "kp@example.com",
+    "phone_number": "123-456-7890",
+    "tags": "senior engineer, friend"
+  },
+  {
+    "full_name": "John Doe",
+    "phone_number": "230-554-7891",
+    "email": "johndoe@company.com",
+    "tags": "senior engineer",
+    "id": 2
+  },
+  {
+    "full_name": "Sarah Smith",
+    "phone_number": "098-765-4321",
+    "email": "sasmith@outlook.com",
+    "tags": "  manager",
+    "id": 3
+  }
+]

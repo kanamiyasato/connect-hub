@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contact Manager</title>
+  <script src="/javascripts/handlebars.js"></script>
+
+   <!-- Models -->
+   <script src="/javascripts/models/Contact.js"></script>
+   <script src="/javascripts/models/ContactCollection.js"></script>
+   <script src="/javascripts/models/TagCollection.js"></script>
+   
+   <!-- Views -->
+   <script src="/javascripts/views/ContactView.js"></script>
+   <script src="/javascripts/views/ContactListView.js"></script>
+   <script src="/javascripts/views/ContactFormView.js"></script>
+   <script src="/javascripts/views/TagsView.js"></script>
+   <script src="/javascripts/views/ModalView.js"></script>
+   
+   <!-- Controllers -->
+   <script src="/javascripts/controllers/ContactsController.js"></script>
+   <script src="/javascripts/controllers/TagsController.js"></script>
+   
+  <!-- Main application script -->
+  <script src="/javascripts/app.js"></script>
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+<body>
+  <header class="bs-header">
+    <div class="container">
+      <a href="#home"><h1>Contact Manager</h1></a>
+    </div>
+  </header>
+
+  <div id="modal-layer" class="hide"></div>
+  <div id="modal" class="hide">
+      <div id="contact-form" class="column">
+        <script id="form" type="text/x-handlebars">
+        {{> form}}
+        </script>
+      </div>
+  </div>
+
+  <script id="form" data-type="partial" type="text/x-handlebars">
+    <form action="/api/contacts/" method="post" id="contact-form">
+      <fieldset>
+        <input type="hidden" name="id" value="{{id}}" />
+        <h2>{{header}}</h2>
+        <div>
+          <label for="full_name">Full name:</label>
+          <input type="text" id="full_name" name="full_name" placeholder="Alex Smith" value="{{full_name}}" required />
+          <span class="validity"></span>
+        </div>
+        <div>
+          <label for="email">Email address:</label>
+          <input type="text" id="email" name="email" placeholder="user@example.com" value="{{email}}" required />
+          <span class="validity"></span>
+        </div>
+        <div>
+          <label for="phone_number">Telephone number:</label>
+          <input type="text" id="phone_number" name="phone_number" placeholder="xxx-xxx-xxxx" value="{{phone_number}}" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+          <span class="validity"></span>
+        </div>
+        <div>
+          <label for="tags">Tags:</label>
+          <input type="hidden" id="selected-tags" name="tags" value="{{tags}}" />
+          <div class="current-tag-container" id="current-tag-container"></div>
+        </div>
+        <div>
+          <input type="text" id="tag-input" placeholder="Add a tag and press enter" />
+          <div class="tag-container" id="tag-container"></div>
+        </div>
+      </fieldset>
+      <div>
+        <input class="submit" type="submit" value="Submit">
+        <input class="cancel" type="reset" value="Cancel">
+      </div>
+    </form>
+  </script>
+
+  <div class="container">
+    <button id="add-contact">Add Contact</button>
+    <div>
+      <p>Search for contact: <input type="text" id="search-input" placeholder="Enter name" />
+      </p>
+    </div>
+    <div id="tags-filter">
+      <p>Filter by tag:<span></span></p>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 main-container">
+        <ul class="contacts-container">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script id="contacts" type="text/x-handlebars">
+    {{#each contacts}}
+    {{> contact}}
+    {{/each}}
+  </script>
+
+  <script id="contact" data-type="partial" type="text/x-handlebars">
+    <div class="contact">
+      <input type="hidden" name="id" value="{{id}}" id="contact_id_{{id}}" />
+      <div class="contact-heading">
+        <h3>{{full_name}}</h3>
+      </div>
+      <div class="contact-body">
+        <dl>
+          <dt>Phone Number:</dt>
+          <dd>{{phone_number}}<dd>
+          <dt>Email:</dt>
+          <dd>{{email}}</dd>
+
+          {{#if tags}}
+            <dt>Tags:</dt>
+            <dd>{{tags}}</dd>
+          {{/if}}
+        </dl>
+      </div>
+      <div class="contact-btns">
+        <input class="edit-contact" type="button" value="Edit">
+        <input class="delete-contact" type="button" value="Delete">
+      </div>
+    </div>
+  </script>
+</body>
+</html>
