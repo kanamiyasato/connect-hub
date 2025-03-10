@@ -1,4 +1,4 @@
-# Contact Manager
+# Connect Hub
 A full-stack contact management application that allows users to efficiently store, organize, and find contact information.
 
 ## Overview
@@ -29,7 +29,7 @@ npm install npm@latest -g
 ### Installation
 ```
 # Clone repository
-git clone https://github.com/kanamiyasato/contact-manager.git
+git clone https://github.com/kanamiyasato/connect-hub.git
 
 # Install dependencies
 npm install
